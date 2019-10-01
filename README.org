@@ -1,0 +1,67 @@
+* Build Image
+
+#+name: build_image
+#+begin_src bash :results output :async
+docker image build -t eos ./eos-docker
+#+end_src
+
+#+RESULTS: build_image
+#+begin_example
+Sending build context to Docker daemon  4.096kB
+Step 1/16 : FROM ubuntu:18.04
+ ---> 2ca708c1c9cc
+Step 2/16 : MAINTAINER lagagain
+ ---> Using cache
+ ---> d8d5136a778a
+Step 3/16 : WORKDIR "~/"
+ ---> Using cache
+ ---> 74ec4949f0f1
+Step 4/16 : RUN mkdir ~/Download
+ ---> Using cache
+ ---> 43a30d1f7777
+Step 5/16 : RUN apt update
+ ---> Using cache
+ ---> 75884568ae93
+Step 6/16 : RUN apt install -y wget
+ ---> Using cache
+ ---> 9a599070bc16
+Step 7/16 : WORKDIR "~/Download"
+ ---> Using cache
+ ---> cee9f42c0e41
+Step 8/16 : RUN wget https://github.com/EOSIO/eos/releases/download/v1.7.0/eosio_1.7.0-1-ubuntu-18.04_amd64.deb
+ ---> Using cache
+ ---> 544e9dc4c256
+Step 9/16 : RUN apt install -y ./eosio_1.7.0-1-ubuntu-18.04_amd64.deb
+ ---> Using cache
+ ---> 03e47cae680a
+Step 10/16 : RUN wget https://github.com/EOSIO/eosio.cdt/releases/download/v1.6.1/eosio.cdt_1.6.1-1_amd64.deb
+ ---> Using cache
+ ---> 7907d3fe0522
+Step 11/16 : RUN apt install -y ./eosio.cdt_1.6.1-1_amd64.deb
+ ---> Using cache
+ ---> 64e8e3ab8b65
+Step 12/16 : EXPOSE 8888
+ ---> Using cache
+ ---> 0398ed0f8c27
+Step 13/16 : EXPOSE 8889
+ ---> Using cache
+ ---> eb6fd5635f0a
+Step 14/16 : USER ubuntu
+ ---> Using cache
+ ---> 77d8cc6bd82d
+Step 15/16 : WORKDIR "~/"
+ ---> Using cache
+ ---> 706070485b9f
+Step 16/16 : CMD ["nodeos", "-e", "-p", "eosio", "--plugin", "eosio::producer_plugin", "--plugin", "eosio::chain_api_plugin", "--plugin", "eosio::http_plugin", "--plugin", "eosio::history_plugin", "--plugin", "eosio::history_api_plugin", "--access-control-allow-origin='*'", "--contracts-console", "--http-validate-host=false" "--verbose-http-errors"]
+ ---> Using cache
+ ---> 68ab4e5a6696
+Successfully built 68ab4e5a6696
+Successfully tagged eos:latest
+#+end_example
+
+
+* Run Container
+
+#+begin_src bash :results output
+docker run --name=eos --rm  -d  -p 8888:8888 eos
+#+end_src
