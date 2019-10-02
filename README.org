@@ -1,3 +1,5 @@
+This image will run eosio_1.7.0 and eosio.cdt_1.6.1 Environment with Ubuntu 18.04.  It will open 0.0.0.0:8888 to recept RPC request.
+
 * Build Image
 
 #+name: build_image
@@ -7,7 +9,8 @@ docker image build -t eos ./eos-docker
 
 #+RESULTS: build_image
 #+begin_example
-Sending build context to Docker daemon  4.096kB
+Sending build context to Docker daemon  4.096kB
+
 Step 1/16 : FROM ubuntu:18.04
  ---> 2ca708c1c9cc
 Step 2/16 : MAINTAINER lagagain
