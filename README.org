@@ -68,3 +68,10 @@ Successfully tagged eos:latest
 #+begin_src bash :results output
 docker run --name=eos --rm  -d  -p 8888:8888 eos
 #+end_src
+
+
+* Stop Container
+
+#+begin_src bash :results output
+docker stop eos
+#+end_src
